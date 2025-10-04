@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package players;
+option go_package = "github.com/timrxd/exhibit-backend/proto";
+
+
+message PlayerReq {
+  string name = 1;
+}
+
+message PlayerResp {
+  string name = 1;
+}
+
+service YourService {
+  rpc GetPlayer(PlayerReq) returns (PlayerResp) {}
+}
