@@ -4,9 +4,12 @@ import (
 	"context"
 	"log"
 	"net"
+	"net/http"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	playerspb "github.com/timrxd/exhibit-backend/proto/players"
 )
 
@@ -31,9 +34,36 @@ func main() {
 
 	// Create a gRPC server object
 	s := grpc.NewServer()
-	// Attach the Greeter service to the server
+	// Attach the Player service to the server
 	playerspb.RegisterPlayerServiceServer(s, &server{})
 	// Serve gRPC Server
 	log.Println("Serving gRPC on 0.0.0.0:8080")
-	log.Fatal(s.Serve(lis))
+	go func() {
+		log.Fatal(s.Serve(lis))
+	}()
+
+	// Create a client connection to the gRPC server we just started
+	// This is where the gRPC-Gateway proxies the requests
+	conn, err := grpc.NewClient(
+		"0.0.0.0:8080",
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+	if err != nil {
+		log.Fatalln("Failed to dial server:", err)
+	}
+
+	gwmux := runtime.NewServeMux()
+	// Register Player Server
+	err = playerspb.RegisterPlayerServiceHandler(context.Background(), gwmux, conn)
+	if err != nil {
+		log.Fatalln("Failed to register gateway:", err)
+	}
+
+	gwServer := &http.Server{
+		Addr:    ":8090",
+		Handler: gwmux,
+	}
+
+	log.Println("Serving gRPC-Gateway on http://0.0.0.0:8090")
+	log.Fatalln(gwServer.ListenAndServe())
 }
