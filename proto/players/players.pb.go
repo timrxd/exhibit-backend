@@ -4,9 +4,10 @@
 // 	protoc        (unknown)
 // source: players/players.proto
 
-package proto
+package exhibit_backend
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -113,14 +114,14 @@ var File_players_players_proto protoreflect.FileDescriptor
 
 const file_players_players_proto_rawDesc = "" +
 	"\n" +
-	"\x15players/players.proto\x12\aplayers\"\x1f\n" +
+	"\x15players/players.proto\x12\aplayers\x1a\x1cgoogle/api/annotations.proto\"\x1f\n" +
 	"\tPlayerReq\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\" \n" +
 	"\n" +
 	"PlayerResp\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name2E\n" +
-	"\vYourService\x126\n" +
-	"\tGetPlayer\x12\x12.players.PlayerReq\x1a\x13.players.PlayerResp\"\x00B)Z'github.com/timrxd/exhibit-backend/protob\x06proto3"
+	"\x04name\x18\x01 \x01(\tR\x04name2_\n" +
+	"\rPlayerService\x12N\n" +
+	"\tGetPlayer\x12\x12.players.PlayerReq\x1a\x13.players.PlayerResp\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/getPlayerB#Z!github.com/timrxd/exhibit-backendb\x06proto3"
 
 var (
 	file_players_players_proto_rawDescOnce sync.Once
@@ -140,8 +141,8 @@ var file_players_players_proto_goTypes = []any{
 	(*PlayerResp)(nil), // 1: players.PlayerResp
 }
 var file_players_players_proto_depIdxs = []int32{
-	0, // 0: players.YourService.GetPlayer:input_type -> players.PlayerReq
-	1, // 1: players.YourService.GetPlayer:output_type -> players.PlayerResp
+	0, // 0: players.PlayerService.GetPlayer:input_type -> players.PlayerReq
+	1, // 1: players.PlayerService.GetPlayer:output_type -> players.PlayerResp
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package players;
+option go_package = "github.com/timrxd/exhibit-backend";
+
+// well know type by google, gRPC gateway uses HTTP annotation.
+import "google/api/annotations.proto";
+
+message PlayerReq {
+  string name = 1;
+}
+
+message PlayerResp {
+  string name = 1;
+}
+
+service PlayerService {
+  rpc GetPlayer (PlayerReq) returns (PlayerResp) {
+  // option type is http
+    option (google.api.http) = {
+      post: "/v1/getPlayer"
+      body: "*"
+    };
+  }
+}
