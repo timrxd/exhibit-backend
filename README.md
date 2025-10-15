@@ -7,6 +7,7 @@ Simple API based in Go.
 ## Setup
  - Make sure the following are installed:
     - [Go](https://go.dev/doc/install)
+        - run ```go install tool``` to build cli tools 
         - make sure your GOBIN is on your $PATH
         - ```export PATH=`go env GOPATH`/bin/:$PATH```
     - [buf](https://buf.build/docs/cli/installation/)
