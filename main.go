@@ -10,20 +10,9 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	playerspb "github.com/timrxd/exhibit-backend/proto/players"
+	"github.com/timrxd/exhibit-backend/handlers"
+	pb "github.com/timrxd/exhibit-backend/proto/players"
 )
-
-type server struct {
-	playerspb.UnimplementedPlayerServiceServer
-}
-
-func NewServer() *server {
-	return &server{}
-}
-
-func (s *server) GetPlayer(ctx context.Context, in *playerspb.PlayerReq) (*playerspb.PlayerResp, error) {
-	return &playerspb.PlayerResp{Name: in.Name}, nil
-}
 
 func main() {
 	// Create a listener on TCP port
@@ -35,7 +24,7 @@ func main() {
 	// Create a gRPC server object
 	s := grpc.NewServer()
 	// Attach the Player service to the server
-	playerspb.RegisterPlayerServiceServer(s, &server{})
+	pb.RegisterPlayerServiceServer(s, handlers.NewServer())
 	// Serve gRPC Server
 	log.Println("Serving gRPC on 0.0.0.0:8080")
 	go func() {
@@ -54,7 +43,7 @@ func main() {
 
 	gwmux := runtime.NewServeMux()
 	// Register Player Server
-	err = playerspb.RegisterPlayerServiceHandler(context.Background(), gwmux, conn)
+	err = pb.RegisterPlayerServiceHandler(context.Background(), gwmux, conn)
 	if err != nil {
 		log.Fatalln("Failed to register gateway:", err)
 	}

@@ -6,12 +6,19 @@ option go_package = "github.com/timrxd/exhibit-backend";
 // well know type by google, gRPC gateway uses HTTP annotation.
 import "google/api/annotations.proto";
 
+message Player {
+  string name = 1;
+  string country = 2;
+  int32 age = 3;
+  int32 points = 4;
+}
+
 message PlayerReq {
   string name = 1;
 }
 
 message PlayerResp {
-  string name = 1;
+  Player player = 1;
 }
 
 service PlayerService {

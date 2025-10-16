@@ -22,6 +22,74 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Player struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Country       string                 `protobuf:"bytes,2,opt,name=country,proto3" json:"country,omitempty"`
+	Age           int32                  `protobuf:"varint,3,opt,name=age,proto3" json:"age,omitempty"`
+	Points        int32                  `protobuf:"varint,4,opt,name=points,proto3" json:"points,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Player) Reset() {
+	*x = Player{}
+	mi := &file_players_players_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Player) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Player) ProtoMessage() {}
+
+func (x *Player) ProtoReflect() protoreflect.Message {
+	mi := &file_players_players_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Player.ProtoReflect.Descriptor instead.
+func (*Player) Descriptor() ([]byte, []int) {
+	return file_players_players_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Player) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Player) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *Player) GetAge() int32 {
+	if x != nil {
+		return x.Age
+	}
+	return 0
+}
+
+func (x *Player) GetPoints() int32 {
+	if x != nil {
+		return x.Points
+	}
+	return 0
+}
+
 type PlayerReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -31,7 +99,7 @@ type PlayerReq struct {
 
 func (x *PlayerReq) Reset() {
 	*x = PlayerReq{}
-	mi := &file_players_players_proto_msgTypes[0]
+	mi := &file_players_players_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +111,7 @@ func (x *PlayerReq) String() string {
 func (*PlayerReq) ProtoMessage() {}
 
 func (x *PlayerReq) ProtoReflect() protoreflect.Message {
-	mi := &file_players_players_proto_msgTypes[0]
+	mi := &file_players_players_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +124,7 @@ func (x *PlayerReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerReq.ProtoReflect.Descriptor instead.
 func (*PlayerReq) Descriptor() ([]byte, []int) {
-	return file_players_players_proto_rawDescGZIP(), []int{0}
+	return file_players_players_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *PlayerReq) GetName() string {
@@ -68,14 +136,14 @@ func (x *PlayerReq) GetName() string {
 
 type PlayerResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Player        *Player                `protobuf:"bytes,1,opt,name=player,proto3" json:"player,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PlayerResp) Reset() {
 	*x = PlayerResp{}
-	mi := &file_players_players_proto_msgTypes[1]
+	mi := &file_players_players_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +155,7 @@ func (x *PlayerResp) String() string {
 func (*PlayerResp) ProtoMessage() {}
 
 func (x *PlayerResp) ProtoReflect() protoreflect.Message {
-	mi := &file_players_players_proto_msgTypes[1]
+	mi := &file_players_players_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,26 +168,31 @@ func (x *PlayerResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerResp.ProtoReflect.Descriptor instead.
 func (*PlayerResp) Descriptor() ([]byte, []int) {
-	return file_players_players_proto_rawDescGZIP(), []int{1}
+	return file_players_players_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *PlayerResp) GetName() string {
+func (x *PlayerResp) GetPlayer() *Player {
 	if x != nil {
-		return x.Name
+		return x.Player
 	}
-	return ""
+	return nil
 }
 
 var File_players_players_proto protoreflect.FileDescriptor
 
 const file_players_players_proto_rawDesc = "" +
 	"\n" +
-	"\x15players/players.proto\x12\aplayers\x1a\x1cgoogle/api/annotations.proto\"\x1f\n" +
+	"\x15players/players.proto\x12\aplayers\x1a\x1cgoogle/api/annotations.proto\"`\n" +
+	"\x06Player\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
+	"\acountry\x18\x02 \x01(\tR\acountry\x12\x10\n" +
+	"\x03age\x18\x03 \x01(\x05R\x03age\x12\x16\n" +
+	"\x06points\x18\x04 \x01(\x05R\x06points\"\x1f\n" +
 	"\tPlayerReq\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\" \n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"5\n" +
 	"\n" +
-	"PlayerResp\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name2_\n" +
+	"PlayerResp\x12'\n" +
+	"\x06player\x18\x01 \x01(\v2\x0f.players.PlayerR\x06player2_\n" +
 	"\rPlayerService\x12N\n" +
 	"\tGetPlayer\x12\x12.players.PlayerReq\x1a\x13.players.PlayerResp\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/getPlayerB#Z!github.com/timrxd/exhibit-backendb\x06proto3"
 
@@ -135,19 +208,21 @@ func file_players_players_proto_rawDescGZIP() []byte {
 	return file_players_players_proto_rawDescData
 }
 
-var file_players_players_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_players_players_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_players_players_proto_goTypes = []any{
-	(*PlayerReq)(nil),  // 0: players.PlayerReq
-	(*PlayerResp)(nil), // 1: players.PlayerResp
+	(*Player)(nil),     // 0: players.Player
+	(*PlayerReq)(nil),  // 1: players.PlayerReq
+	(*PlayerResp)(nil), // 2: players.PlayerResp
 }
 var file_players_players_proto_depIdxs = []int32{
-	0, // 0: players.PlayerService.GetPlayer:input_type -> players.PlayerReq
-	1, // 1: players.PlayerService.GetPlayer:output_type -> players.PlayerResp
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: players.PlayerResp.player:type_name -> players.Player
+	1, // 1: players.PlayerService.GetPlayer:input_type -> players.PlayerReq
+	2, // 2: players.PlayerService.GetPlayer:output_type -> players.PlayerResp
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_players_players_proto_init() }
@@ -161,7 +236,7 @@ func file_players_players_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_players_players_proto_rawDesc), len(file_players_players_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
