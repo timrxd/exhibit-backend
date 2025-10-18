@@ -46,7 +46,7 @@ func TestAPI(t *testing.T) {
 	}
 
 	if resp.Player.Name != "Federer" {
-		t.Errorf("Body mismatch\tExpected %s\tGot %s", "Federer", resp.Player.Name)
+		t.Errorf("Error: Body mismatch\tExpected %s\tGot %s", "Federer", resp.Player.Name)
 	}
 
 }
