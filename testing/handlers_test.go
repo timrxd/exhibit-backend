@@ -1,40 +1,52 @@
 package testing
 
 import (
-	"bytes"
-	"encoding/json"
-	"net/http"
-	"net/http/httptest"
+	"context"
+	"log"
+	"net"
 	"testing"
 
+	"github.com/timrxd/exhibit-backend/handlers"
 	pb "github.com/timrxd/exhibit-backend/proto/players"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/test/bufconn"
 )
+
+const bufSize = 1024 * 1024
+
+var lis *bufconn.Listener
+
+func init() {
+	lis = bufconn.Listen(bufSize)
+	s := grpc.NewServer()
+	pb.RegisterPlayerServiceServer(s, handlers.NewServer())
+	go func() {
+		if err := s.Serve(lis); err != nil {
+			log.Fatalf("Server exited with error: %v", err)
+		}
+	}()
+}
+
+func bufDialer(context.Context, string) (net.Conn, error) {
+	return lis.Dial()
+}
 
 func TestAPI(t *testing.T) {
 
-	cases := []struct {
-		method string
-		path   string
-		body   pb.PlayerReq
-
-		outCode int
-		outBody string
-	}{
-		// Add first user to address book
-		{"POST", "/users", pb.PlayerReq{Name: "Federer"}, 200, `{"player":{"name":"Federer", "country":"", "age":0, "points":0}`},
+	ctx := context.Background()
+	conn, err := grpc.DialContext(ctx, "bufnet", grpc.WithContextDialer(bufDialer), grpc.WithInsecure())
+	if err != nil {
+		t.Fatalf("Failed to dial bufnet: %v", err)
+	}
+	defer conn.Close()
+	client := pb.NewPlayerServiceClient(conn)
+	resp, err := client.GetPlayer(ctx, &pb.PlayerReq{Name: "Federer"})
+	if err != nil {
+		t.Fatalf("SayHello failed: %v", err)
 	}
 
-	for _, c := range cases {
-		response := httptest.NewRecorder()
-		body, _ := json.Marshal(c.body)
-		request, _ := http.NewRequest(c.method, c.path, bytes.NewBuffer(body))
-		AddressRouter().ServeHTTP(response, request)
-
-		b := response.Body.String()
-		if b[:len(b)-1] != c.outBody {
-			t.Errorf("Body Mismatch: %s %s\nResponse\t%s\nExpected\t%s", c.method, c.path, b[:len(b)-1], c.outBody)
-		} else if response.Code != c.outCode {
-			t.Errorf("Response Code Mismatch: %s %s\nResponse\t%s\nExpected\t%s", c.method, c.path, response.Code, c.outCode)
-		}
+	if resp.Player.Name != "Federer" {
+		t.Errorf("Body mismatch\tExpected %s\tGot %s", "Federer", resp.Player.Name)
 	}
+
 }
