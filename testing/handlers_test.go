@@ -42,7 +42,7 @@ func TestAPI(t *testing.T) {
 	client := pb.NewPlayerServiceClient(conn)
 	resp, err := client.GetPlayer(ctx, &pb.PlayerReq{Name: "Federer"})
 	if err != nil {
-		t.Fatalf("SayHello failed: %v", err)
+		t.Fatalf("GetPlayer failed: %v", err)
 	}
 
 	if resp.Player.Name != "Federer" {
