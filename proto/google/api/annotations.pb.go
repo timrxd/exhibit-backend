@@ -18,15 +18,14 @@
 // 	protoc        (unknown)
 // source: google/api/annotations.proto
 
-package annotations
+package api
 
 import (
-	reflect "reflect"
-	unsafe "unsafe"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	descriptorpb "google.golang.org/protobuf/types/descriptorpb"
+	reflect "reflect"
+	unsafe "unsafe"
 )
 
 const (
@@ -61,8 +60,10 @@ const file_google_api_annotations_proto_rawDesc = "" +
 	"\n" +
 	"\x1cgoogle/api/annotations.proto\x12\n" +
 	"google.api\x1a\x15google/api/http.proto\x1a google/protobuf/descriptor.proto:K\n" +
-	"\x04http\x12\x1e.google.protobuf.MethodOptions\x18\xb0ʼ\" \x01(\v2\x14.google.api.HttpRuleR\x04httpBn\n" +
-	"\x0ecom.google.apiB\x10AnnotationsProtoP\x01ZAgoogle.golang.org/genproto/googleapis/api/annotations;annotations\xa2\x02\x04GAPIb\x06proto3"
+	"\x04http\x12\x1e.google.protobuf.MethodOptions\x18\xb0ʼ\" \x01(\v2\x14.google.api.HttpRuleR\x04httpB\x9f\x01\n" +
+	"\x0ecom.google.apiB\x10AnnotationsProtoP\x01Z2github.com/timrxd/exhibit-backend/proto/google/api\xa2\x02\x03GAX\xaa\x02\n" +
+	"Google.Api\xca\x02\n" +
+	"Google\\Api\xe2\x02\x16Google\\Api\\GPBMetadata\xea\x02\vGoogle::Apib\x06proto3"
 
 var file_google_api_annotations_proto_goTypes = []any{
 	(*descriptorpb.MethodOptions)(nil), // 0: google.protobuf.MethodOptions

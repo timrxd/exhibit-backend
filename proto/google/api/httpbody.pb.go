@@ -18,7 +18,7 @@
 // 	protoc        (unknown)
 // source: google/api/httpbody.proto
 
-package httpbody
+package api
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -153,8 +153,10 @@ const file_google_api_httpbody_proto_rawDesc = "" +
 	"\x04data\x18\x02 \x01(\fR\x04data\x124\n" +
 	"\n" +
 	"extensions\x18\x03 \x03(\v2\x14.google.protobuf.AnyR\n" +
-	"extensionsBe\n" +
-	"\x0ecom.google.apiB\rHttpBodyProtoP\x01Z;google.golang.org/genproto/googleapis/api/httpbody;httpbody\xa2\x02\x04GAPIb\x06proto3"
+	"extensionsB\x9c\x01\n" +
+	"\x0ecom.google.apiB\rHttpbodyProtoP\x01Z2github.com/timrxd/exhibit-backend/proto/google/api\xa2\x02\x03GAX\xaa\x02\n" +
+	"Google.Api\xca\x02\n" +
+	"Google\\Api\xe2\x02\x16Google\\Api\\GPBMetadata\xea\x02\vGoogle::Apib\x06proto3"
 
 var (
 	file_google_api_httpbody_proto_rawDescOnce sync.Once
