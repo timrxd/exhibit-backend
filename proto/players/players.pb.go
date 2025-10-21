@@ -22,6 +22,42 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type EmptyMessage struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EmptyMessage) Reset() {
+	*x = EmptyMessage{}
+	mi := &file_players_players_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EmptyMessage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmptyMessage) ProtoMessage() {}
+
+func (x *EmptyMessage) ProtoReflect() protoreflect.Message {
+	mi := &file_players_players_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmptyMessage.ProtoReflect.Descriptor instead.
+func (*EmptyMessage) Descriptor() ([]byte, []int) {
+	return file_players_players_proto_rawDescGZIP(), []int{0}
+}
+
 type Player struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -34,7 +70,7 @@ type Player struct {
 
 func (x *Player) Reset() {
 	*x = Player{}
-	mi := &file_players_players_proto_msgTypes[0]
+	mi := &file_players_players_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -46,7 +82,7 @@ func (x *Player) String() string {
 func (*Player) ProtoMessage() {}
 
 func (x *Player) ProtoReflect() protoreflect.Message {
-	mi := &file_players_players_proto_msgTypes[0]
+	mi := &file_players_players_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -59,7 +95,7 @@ func (x *Player) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Player.ProtoReflect.Descriptor instead.
 func (*Player) Descriptor() ([]byte, []int) {
-	return file_players_players_proto_rawDescGZIP(), []int{0}
+	return file_players_players_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Player) GetName() string {
@@ -90,28 +126,28 @@ func (x *Player) GetPoints() int32 {
 	return 0
 }
 
-type PlayerReq struct {
+type GetPlayerReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PlayerReq) Reset() {
-	*x = PlayerReq{}
-	mi := &file_players_players_proto_msgTypes[1]
+func (x *GetPlayerReq) Reset() {
+	*x = GetPlayerReq{}
+	mi := &file_players_players_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PlayerReq) String() string {
+func (x *GetPlayerReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PlayerReq) ProtoMessage() {}
+func (*GetPlayerReq) ProtoMessage() {}
 
-func (x *PlayerReq) ProtoReflect() protoreflect.Message {
-	mi := &file_players_players_proto_msgTypes[1]
+func (x *GetPlayerReq) ProtoReflect() protoreflect.Message {
+	mi := &file_players_players_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -122,12 +158,100 @@ func (x *PlayerReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PlayerReq.ProtoReflect.Descriptor instead.
-func (*PlayerReq) Descriptor() ([]byte, []int) {
-	return file_players_players_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use GetPlayerReq.ProtoReflect.Descriptor instead.
+func (*GetPlayerReq) Descriptor() ([]byte, []int) {
+	return file_players_players_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *PlayerReq) GetName() string {
+func (x *GetPlayerReq) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type UpdatePlayerReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Player        *Player                `protobuf:"bytes,1,opt,name=player,proto3" json:"player,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePlayerReq) Reset() {
+	*x = UpdatePlayerReq{}
+	mi := &file_players_players_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePlayerReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlayerReq) ProtoMessage() {}
+
+func (x *UpdatePlayerReq) ProtoReflect() protoreflect.Message {
+	mi := &file_players_players_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlayerReq.ProtoReflect.Descriptor instead.
+func (*UpdatePlayerReq) Descriptor() ([]byte, []int) {
+	return file_players_players_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *UpdatePlayerReq) GetPlayer() *Player {
+	if x != nil {
+		return x.Player
+	}
+	return nil
+}
+
+type DeletePlayerReq struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeletePlayerReq) Reset() {
+	*x = DeletePlayerReq{}
+	mi := &file_players_players_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeletePlayerReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePlayerReq) ProtoMessage() {}
+
+func (x *DeletePlayerReq) ProtoReflect() protoreflect.Message {
+	mi := &file_players_players_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePlayerReq.ProtoReflect.Descriptor instead.
+func (*DeletePlayerReq) Descriptor() ([]byte, []int) {
+	return file_players_players_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DeletePlayerReq) GetName() string {
 	if x != nil {
 		return x.Name
 	}
@@ -143,7 +267,7 @@ type PlayerResp struct {
 
 func (x *PlayerResp) Reset() {
 	*x = PlayerResp{}
-	mi := &file_players_players_proto_msgTypes[2]
+	mi := &file_players_players_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -155,7 +279,7 @@ func (x *PlayerResp) String() string {
 func (*PlayerResp) ProtoMessage() {}
 
 func (x *PlayerResp) ProtoReflect() protoreflect.Message {
-	mi := &file_players_players_proto_msgTypes[2]
+	mi := &file_players_players_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -168,7 +292,7 @@ func (x *PlayerResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlayerResp.ProtoReflect.Descriptor instead.
 func (*PlayerResp) Descriptor() ([]byte, []int) {
-	return file_players_players_proto_rawDescGZIP(), []int{2}
+	return file_players_players_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PlayerResp) GetPlayer() *Player {
@@ -178,23 +302,78 @@ func (x *PlayerResp) GetPlayer() *Player {
 	return nil
 }
 
+type PlayerListResp struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Players       []*Player              `protobuf:"bytes,1,rep,name=players,proto3" json:"players,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PlayerListResp) Reset() {
+	*x = PlayerListResp{}
+	mi := &file_players_players_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PlayerListResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlayerListResp) ProtoMessage() {}
+
+func (x *PlayerListResp) ProtoReflect() protoreflect.Message {
+	mi := &file_players_players_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlayerListResp.ProtoReflect.Descriptor instead.
+func (*PlayerListResp) Descriptor() ([]byte, []int) {
+	return file_players_players_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *PlayerListResp) GetPlayers() []*Player {
+	if x != nil {
+		return x.Players
+	}
+	return nil
+}
+
 var File_players_players_proto protoreflect.FileDescriptor
 
 const file_players_players_proto_rawDesc = "" +
 	"\n" +
-	"\x15players/players.proto\x12\aplayers\x1a\x1cgoogle/api/annotations.proto\"`\n" +
+	"\x15players/players.proto\x12\aplayers\x1a\x1cgoogle/api/annotations.proto\"\x0e\n" +
+	"\fEmptyMessage\"`\n" +
 	"\x06Player\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\acountry\x18\x02 \x01(\tR\acountry\x12\x10\n" +
 	"\x03age\x18\x03 \x01(\x05R\x03age\x12\x16\n" +
-	"\x06points\x18\x04 \x01(\x05R\x06points\"\x1f\n" +
-	"\tPlayerReq\x12\x12\n" +
+	"\x06points\x18\x04 \x01(\x05R\x06points\"\"\n" +
+	"\fGetPlayerReq\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\":\n" +
+	"\x0fUpdatePlayerReq\x12'\n" +
+	"\x06player\x18\x01 \x01(\v2\x0f.players.PlayerR\x06player\"%\n" +
+	"\x0fDeletePlayerReq\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"5\n" +
 	"\n" +
 	"PlayerResp\x12'\n" +
-	"\x06player\x18\x01 \x01(\v2\x0f.players.PlayerR\x06player2_\n" +
-	"\rPlayerService\x12N\n" +
-	"\tGetPlayer\x12\x12.players.PlayerReq\x1a\x13.players.PlayerResp\"\x18\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/getPlayerB#Z!github.com/timrxd/exhibit-backendb\x06proto3"
+	"\x06player\x18\x01 \x01(\v2\x0f.players.PlayerR\x06player\";\n" +
+	"\x0ePlayerListResp\x12)\n" +
+	"\aplayers\x18\x01 \x03(\v2\x0f.players.PlayerR\aplayers2\xeb\x02\n" +
+	"\rPlayerService\x12R\n" +
+	"\tGetPlayer\x12\x15.players.GetPlayerReq\x1a\x13.players.PlayerResp\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/player/{name}\x12T\n" +
+	"\rGetAllPlayers\x12\x15.players.EmptyMessage\x1a\x17.players.PlayerListResp\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/v1/players\x12T\n" +
+	"\fUpdatePlayer\x12\x18.players.UpdatePlayerReq\x1a\x13.players.PlayerResp\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v1/player\x12Z\n" +
+	"\fDeletePlayer\x12\x18.players.DeletePlayerReq\x1a\x15.players.EmptyMessage\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/v1/player/{name}B#Z!github.com/timrxd/exhibit-backendb\x06proto3"
 
 var (
 	file_players_players_proto_rawDescOnce sync.Once
@@ -208,21 +387,33 @@ func file_players_players_proto_rawDescGZIP() []byte {
 	return file_players_players_proto_rawDescData
 }
 
-var file_players_players_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_players_players_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_players_players_proto_goTypes = []any{
-	(*Player)(nil),     // 0: players.Player
-	(*PlayerReq)(nil),  // 1: players.PlayerReq
-	(*PlayerResp)(nil), // 2: players.PlayerResp
+	(*EmptyMessage)(nil),    // 0: players.EmptyMessage
+	(*Player)(nil),          // 1: players.Player
+	(*GetPlayerReq)(nil),    // 2: players.GetPlayerReq
+	(*UpdatePlayerReq)(nil), // 3: players.UpdatePlayerReq
+	(*DeletePlayerReq)(nil), // 4: players.DeletePlayerReq
+	(*PlayerResp)(nil),      // 5: players.PlayerResp
+	(*PlayerListResp)(nil),  // 6: players.PlayerListResp
 }
 var file_players_players_proto_depIdxs = []int32{
-	0, // 0: players.PlayerResp.player:type_name -> players.Player
-	1, // 1: players.PlayerService.GetPlayer:input_type -> players.PlayerReq
-	2, // 2: players.PlayerService.GetPlayer:output_type -> players.PlayerResp
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	1, // 0: players.UpdatePlayerReq.player:type_name -> players.Player
+	1, // 1: players.PlayerResp.player:type_name -> players.Player
+	1, // 2: players.PlayerListResp.players:type_name -> players.Player
+	2, // 3: players.PlayerService.GetPlayer:input_type -> players.GetPlayerReq
+	0, // 4: players.PlayerService.GetAllPlayers:input_type -> players.EmptyMessage
+	3, // 5: players.PlayerService.UpdatePlayer:input_type -> players.UpdatePlayerReq
+	4, // 6: players.PlayerService.DeletePlayer:input_type -> players.DeletePlayerReq
+	5, // 7: players.PlayerService.GetPlayer:output_type -> players.PlayerResp
+	6, // 8: players.PlayerService.GetAllPlayers:output_type -> players.PlayerListResp
+	5, // 9: players.PlayerService.UpdatePlayer:output_type -> players.PlayerResp
+	0, // 10: players.PlayerService.DeletePlayer:output_type -> players.EmptyMessage
+	7, // [7:11] is the sub-list for method output_type
+	3, // [3:7] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_players_players_proto_init() }
@@ -236,7 +427,7 @@ func file_players_players_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_players_players_proto_rawDesc), len(file_players_players_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

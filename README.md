@@ -17,5 +17,5 @@ Simple API based in Go.
  - ```./run.sh```
  - REST gateway is located at http://localhost:8090/v1
     - ex:  
-        ```curl -X POST -k http://localhost:8090/v1/getPlayer -d '{"name": "Federer"}'```
+        ```curl -X GET -k http://localhost:8090/v1/player/Federer```
 

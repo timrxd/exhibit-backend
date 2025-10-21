@@ -25,6 +25,10 @@ func main() {
 	s := grpc.NewServer()
 	// Attach the Player service to the server
 	pb.RegisterPlayerServiceServer(s, handlers.NewServer())
+
+	// Load some test data
+	handlers.LoadTestData()
+
 	// Serve gRPC Server
 	log.Println("Serving gRPC on 0.0.0.0:8080")
 	go func() {

@@ -19,14 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PlayerService_GetPlayer_FullMethodName = "/players.PlayerService/GetPlayer"
+	PlayerService_GetPlayer_FullMethodName     = "/players.PlayerService/GetPlayer"
+	PlayerService_GetAllPlayers_FullMethodName = "/players.PlayerService/GetAllPlayers"
+	PlayerService_UpdatePlayer_FullMethodName  = "/players.PlayerService/UpdatePlayer"
+	PlayerService_DeletePlayer_FullMethodName  = "/players.PlayerService/DeletePlayer"
 )
 
 // PlayerServiceClient is the client API for PlayerService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PlayerServiceClient interface {
-	GetPlayer(ctx context.Context, in *PlayerReq, opts ...grpc.CallOption) (*PlayerResp, error)
+	GetPlayer(ctx context.Context, in *GetPlayerReq, opts ...grpc.CallOption) (*PlayerResp, error)
+	GetAllPlayers(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (*PlayerListResp, error)
+	UpdatePlayer(ctx context.Context, in *UpdatePlayerReq, opts ...grpc.CallOption) (*PlayerResp, error)
+	DeletePlayer(ctx context.Context, in *DeletePlayerReq, opts ...grpc.CallOption) (*EmptyMessage, error)
 }
 
 type playerServiceClient struct {
@@ -37,10 +43,40 @@ func NewPlayerServiceClient(cc grpc.ClientConnInterface) PlayerServiceClient {
 	return &playerServiceClient{cc}
 }
 
-func (c *playerServiceClient) GetPlayer(ctx context.Context, in *PlayerReq, opts ...grpc.CallOption) (*PlayerResp, error) {
+func (c *playerServiceClient) GetPlayer(ctx context.Context, in *GetPlayerReq, opts ...grpc.CallOption) (*PlayerResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PlayerResp)
 	err := c.cc.Invoke(ctx, PlayerService_GetPlayer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *playerServiceClient) GetAllPlayers(ctx context.Context, in *EmptyMessage, opts ...grpc.CallOption) (*PlayerListResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlayerListResp)
+	err := c.cc.Invoke(ctx, PlayerService_GetAllPlayers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *playerServiceClient) UpdatePlayer(ctx context.Context, in *UpdatePlayerReq, opts ...grpc.CallOption) (*PlayerResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PlayerResp)
+	err := c.cc.Invoke(ctx, PlayerService_UpdatePlayer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *playerServiceClient) DeletePlayer(ctx context.Context, in *DeletePlayerReq, opts ...grpc.CallOption) (*EmptyMessage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EmptyMessage)
+	err := c.cc.Invoke(ctx, PlayerService_DeletePlayer_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -51,7 +87,10 @@ func (c *playerServiceClient) GetPlayer(ctx context.Context, in *PlayerReq, opts
 // All implementations must embed UnimplementedPlayerServiceServer
 // for forward compatibility.
 type PlayerServiceServer interface {
-	GetPlayer(context.Context, *PlayerReq) (*PlayerResp, error)
+	GetPlayer(context.Context, *GetPlayerReq) (*PlayerResp, error)
+	GetAllPlayers(context.Context, *EmptyMessage) (*PlayerListResp, error)
+	UpdatePlayer(context.Context, *UpdatePlayerReq) (*PlayerResp, error)
+	DeletePlayer(context.Context, *DeletePlayerReq) (*EmptyMessage, error)
 	mustEmbedUnimplementedPlayerServiceServer()
 }
 
@@ -62,8 +101,17 @@ type PlayerServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedPlayerServiceServer struct{}
 
-func (UnimplementedPlayerServiceServer) GetPlayer(context.Context, *PlayerReq) (*PlayerResp, error) {
+func (UnimplementedPlayerServiceServer) GetPlayer(context.Context, *GetPlayerReq) (*PlayerResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPlayer not implemented")
+}
+func (UnimplementedPlayerServiceServer) GetAllPlayers(context.Context, *EmptyMessage) (*PlayerListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllPlayers not implemented")
+}
+func (UnimplementedPlayerServiceServer) UpdatePlayer(context.Context, *UpdatePlayerReq) (*PlayerResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlayer not implemented")
+}
+func (UnimplementedPlayerServiceServer) DeletePlayer(context.Context, *DeletePlayerReq) (*EmptyMessage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePlayer not implemented")
 }
 func (UnimplementedPlayerServiceServer) mustEmbedUnimplementedPlayerServiceServer() {}
 func (UnimplementedPlayerServiceServer) testEmbeddedByValue()                       {}
@@ -87,7 +135,7 @@ func RegisterPlayerServiceServer(s grpc.ServiceRegistrar, srv PlayerServiceServe
 }
 
 func _PlayerService_GetPlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlayerReq)
+	in := new(GetPlayerReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -99,7 +147,61 @@ func _PlayerService_GetPlayer_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: PlayerService_GetPlayer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PlayerServiceServer).GetPlayer(ctx, req.(*PlayerReq))
+		return srv.(PlayerServiceServer).GetPlayer(ctx, req.(*GetPlayerReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PlayerService_GetAllPlayers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmptyMessage)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlayerServiceServer).GetAllPlayers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlayerService_GetAllPlayers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlayerServiceServer).GetAllPlayers(ctx, req.(*EmptyMessage))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PlayerService_UpdatePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePlayerReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlayerServiceServer).UpdatePlayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlayerService_UpdatePlayer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlayerServiceServer).UpdatePlayer(ctx, req.(*UpdatePlayerReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PlayerService_DeletePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePlayerReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlayerServiceServer).DeletePlayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlayerService_DeletePlayer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlayerServiceServer).DeletePlayer(ctx, req.(*DeletePlayerReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -114,6 +216,18 @@ var PlayerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPlayer",
 			Handler:    _PlayerService_GetPlayer_Handler,
+		},
+		{
+			MethodName: "GetAllPlayers",
+			Handler:    _PlayerService_GetAllPlayers_Handler,
+		},
+		{
+			MethodName: "UpdatePlayer",
+			Handler:    _PlayerService_UpdatePlayer_Handler,
+		},
+		{
+			MethodName: "DeletePlayer",
+			Handler:    _PlayerService_DeletePlayer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -40,7 +40,7 @@ func TestAPI(t *testing.T) {
 	}
 	defer conn.Close()
 	client := pb.NewPlayerServiceClient(conn)
-	resp, err := client.GetPlayer(ctx, &pb.PlayerReq{Name: "Federer"})
+	resp, err := client.GetPlayer(ctx, &pb.GetPlayerReq{Name: "Federer"})
 	if err != nil {
 		t.Fatalf("GetPlayer failed: %v", err)
 	}

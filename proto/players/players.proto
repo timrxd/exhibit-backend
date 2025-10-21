@@ -6,6 +6,8 @@ option go_package = "github.com/timrxd/exhibit-backend";
 // well know type by google, gRPC gateway uses HTTP annotation.
 import "google/api/annotations.proto";
 
+message EmptyMessage {}
+
 message Player {
   string name = 1;
   string country = 2;
@@ -13,7 +15,15 @@ message Player {
   int32 points = 4;
 }
 
-message PlayerReq {
+message GetPlayerReq {
+  string name = 1;
+}
+
+message UpdatePlayerReq {
+  Player player = 1;
+}
+
+message DeletePlayerReq {
   string name = 1;
 }
 
@@ -21,12 +31,35 @@ message PlayerResp {
   Player player = 1;
 }
 
+message PlayerListResp {
+  repeated Player players = 1;
+}
+
 service PlayerService {
-  rpc GetPlayer (PlayerReq) returns (PlayerResp) {
+  rpc GetPlayer(GetPlayerReq) returns (PlayerResp) {
   // option type is http
     option (google.api.http) = {
-      post: "/v1/getPlayer"
+      get: "/v1/player/{name}"
+    };
+  }
+  
+  rpc GetAllPlayers(EmptyMessage) returns (PlayerListResp) {
+    option (google.api.http) = {
+      get: "/v1/players"
+    };
+  }
+
+  rpc UpdatePlayer(UpdatePlayerReq) returns (PlayerResp) {
+    option (google.api.http) = {
+      post: "/v1/player"
       body: "*"
     };
   }
+
+  rpc DeletePlayer(DeletePlayerReq) returns (EmptyMessage) {
+    option (google.api.http) = {
+      delete: "/v1/player/{name}"
+    };
+  }
+
 }
