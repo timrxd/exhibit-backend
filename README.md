@@ -2,7 +2,7 @@
 
 Simple backend server to to provide data for [exhibit-frontend](https://github.com/timrxd/exhibit-frontend) (coming soon™).
 
-Simple API based in Go.
+Simple API based in Go, using gRPC-gateway to generate a reverse-proxy based on the protobuf spec. 
 
 ## Setup
  - Make sure the following are installed:
