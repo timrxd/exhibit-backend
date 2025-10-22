@@ -14,8 +14,20 @@ Simple API based in Go.
     - [protobuf](https://protobuf.dev/installation/)
 
 ## Run
- - ```./run.sh```
+ - ```./scripts/run.sh```
  - REST gateway is located at http://localhost:8090/v1
     - ex:  
         ```curl -X GET -k http://localhost:8090/v1/player/Federer```
 
+## API
+Endpoints:
+ - GET /v1/player/{name}
+ - GET /v1/players
+ - POST /v1/player
+ - DELETE /v1/player/{name}  
+  
+Player:
+ - string Name
+ - string Country
+ - int32 Age
+ - int32 Points
