@@ -1,6 +1,6 @@
 # exhibit-backend
 
-Simple backend server to to provide data for [exhibit-frontend](https://github.com/timrxd/exhibit-frontend) (coming soon™).
+Simple backend server to that provides data based on the ATP tennis rankings.  
 
 Simple API based in Go, using gRPC-gateway to generate a reverse-proxy based on the protobuf spec. 
 
