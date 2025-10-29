@@ -2,11 +2,11 @@
 // source: players/players.proto
 
 /*
-Package players is a reverse proxy.
+Package exhibit_backend is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package players
+package exhibit_backend
 
 import (
 	"context"
