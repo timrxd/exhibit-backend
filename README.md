@@ -2,7 +2,7 @@
 
 Simple backend server to that provides data based on the ATP tennis rankings.  
 
-Simple API based in Go, using gRPC-gateway to generate a reverse-proxy based on the protobuf spec. 
+Basic API based in Go, using gRPC-gateway to generate a reverse-proxy based on the protobuf spec. 
 
 ## Setup
  - Make sure the following are installed:
